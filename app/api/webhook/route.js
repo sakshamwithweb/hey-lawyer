@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import logger from '../../../lib/logger';
 import messageBuffer from '../../../lib/messageBuffer';
 import getOpenAIResponse from '../../../lib/openAI';
+import dbConnect from '@/lib/mongodb';
 
 // --------------------------- Configuration ---------------------------
 const TRIGGER_PHRASES = ["hey lawyer", "hey, lawyer"];
@@ -49,6 +50,10 @@ export async function POST(request) {
 
   const sessionId = data.session_id;
   const uid = request.nextUrl.searchParams.get('uid');
+  await dbConnect();
+  const look = await User.findOne({ omiUserId: uid });
+  if (!look) return NextResponse.json({ status: "error", message: "User not found" }, { status: 400 });
+
   logger.info(`Processing request for session_id: ${sessionId}, uid: ${uid}`);
 
   if (!sessionId) {
@@ -216,7 +221,7 @@ export async function POST(request) {
         }
 
         logger.info(`Processing complete question: "${fullQuestion}"`);
-        const response = await getOpenAIResponse(fullQuestion);
+        const response = await getOpenAIResponse(fullQuestion,look);
         logger.info(`Got response from OpenAI: "${response}"`);
 
         // Reset buffer state after processing
