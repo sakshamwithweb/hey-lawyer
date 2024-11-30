@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import logger from '../../../lib/logger';
 import messageBuffer from '../../../lib/messageBuffer';
 import getOpenAIResponse from '../../../lib/openAI';
+import User from '@/models/User';
 import dbConnect from '@/lib/mongodb';
 
 // --------------------------- Configuration ---------------------------
