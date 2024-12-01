@@ -10,7 +10,6 @@ Hey Lawyer is a voice-activated legal assistant designed to provide quick, accur
 - **Real-Time Transcript Processing**: Processes conversations as they happen for dynamic and relevant responses.
 - **AI-Powered Legal Advice**: Integrated with OpenAI GPT-4 to deliver contextually accurate and authoritative guidance.
 - **User Personalization**: Tailored advice based on user demographics and preferences.
-- **Dynamic Session Management**: Ensures smooth and efficient handling of multiple active conversations.
 
 ---
 
